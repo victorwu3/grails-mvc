@@ -1,10 +1,13 @@
 require 'rack'
+require_relative '../lib/controller_base.rb'
+require_relative '../lib/router'
+require_relative '../lib/static'
+require_relative '../lib/show_exceptions'
 
 attr_reader :port, :host
 class GrailsServer
-  def initialize(port, host)
+  def initialize(port)
     @port = port
-    @host = host
     router = Router.new
     router.draw(&ROUTES)
 
@@ -28,8 +31,7 @@ class GrailsServer
   def start
     Rack::Server.start(
       app: @app,
-      Port: 3000,
-      Host: host
+      Port: 3000
     )
   end
 

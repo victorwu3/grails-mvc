@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby
+
+require 'grails'
+
+Grails::CLI.start(ARGV)
