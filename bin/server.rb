@@ -27,13 +27,11 @@ class GrailsServer
     end
   end
 
-
   def start
     Rack::Server.start(
       app: @app,
       Port: 3000
     )
   end
-
 
 end

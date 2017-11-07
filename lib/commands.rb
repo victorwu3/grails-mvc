@@ -11,7 +11,7 @@ module Grails
     end
   end
 
-  class Generator < Thor
+  class Generate < Thor
     desc "migration NAME", "creates a migration file with name"
     def migration(name)
       file_name = name
@@ -74,11 +74,28 @@ module Grails
     desc "new", "'new' will generate a new Grails application in the working directory"
 
     def new(app_name)
-      g = Generator.new
-      g.directory "../lib", "./#{app_name.chomp}"
+      app_dir = File.join(Dir.pwd, name)
+      Raise "Directory of #{app_name} already exists" if Dir.exist?(app_dir)
+
+      
     end
 
 
-    desc "generate COMMANDS "
+    desc "generate COMMAND ...args", "Generates migration, model, or controller"
+    subcommand "g", Generate
+
+    desc "generate COMMAND ...args", "Generates migration, model, or controller"
+    subcommand "generate", Generate
+
+    desc "db COMMAND", "execute an action with the database"
+    subcommand "db", DB
+
+    desc "server", "starts a grails server, with default port of 3000"
+    def server
+      raise "Cannot find Grails app" unless project_root
+
+      GrailsServer.new()
+    end
+
   end
 end
