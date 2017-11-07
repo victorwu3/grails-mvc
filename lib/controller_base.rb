@@ -6,7 +6,7 @@ require_relative './flash'
 require 'active_support/inflector'
 
 Module GrailsController
-  class ControllerBase
+  class Base
     attr_reader :req, :res, :params
 
     def initialize(req, res, params = {})

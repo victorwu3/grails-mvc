@@ -25,8 +25,6 @@ class GrailsServer
   end
 
 
-
-
   def start
     Rack::Server.start(
       app: @app,

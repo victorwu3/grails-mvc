@@ -1,11 +1,11 @@
 
 lib = File.expand_path("../lib", __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require "grails/mvc/version"
+require "version"
 
 Gem::Specification.new do |spec|
   spec.name          = "grails-mvc"
-  spec.version       = Grails::Mvc::VERSION
+  spec.version       = Grails::VERSION
   spec.authors       = ["Victor Wu"]
   spec.email         = ["victor.wu.1@vanderbilt.edu"]
 
