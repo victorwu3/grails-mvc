@@ -28,18 +28,47 @@ module Grails
       raise "Model already exists" if File.exist?(path)
 
       File.open(path, "w") do |file|
-
+        file.write("class #{name.camelcase}" < GrailedORM::Base\n)
+        file.write("   self.finalize!\n")
+        file.write("end\n")
       end
 
       migration(name)
       puts "New migration file #{name} can be found at #{path}"
     end
 
-    def self.source_root
-      File.dirname(__FILE__)
+    desc "controller NAME", "creates a controller file and view folder"
+    def controller(name)
+      controller_path = File.join(project_root, "app/controllers/#{file.pluralize.underscore}_controlller.rb"
+      controller_name = "#{name.pluralize.camelcase}Controller"
+      view_dir = File.join(project_root, "app/views/#{file.pluralize.underscore}")
+      raise "Controller already exists" if File.exist?(controller_path)
+
+      File.open(controller_path, "w") do |file|
+        file.write("class #{controller_name} < ApplicationController\n")
+        file.write("end")
+      end
+      Dir.mkdir(view_dir) unless Dir.exist?(view_dir)
+      puts "New controller file #{name} can be found at #{controller_path}"
     end
   end
 
+  class DB < Thor
+    desc "reset", "resets the database and remigrates and reseeds"
+    def reset
+      DBConnection.reset
+    end
+
+    desc "seed", "seeds the database with seed file"
+    def seed
+      DBConnection.seed
+    end
+
+    desc "migrate", "runs all pending migrations if any"
+    def migrate
+      DBConnection.migrate
+    end
+  end
 
   class CLI < Thor
     desc "new", "'new' will generate a new Grails application in the working directory"
