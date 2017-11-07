@@ -84,8 +84,8 @@ module Grails
       Dir.mkdir(File.join(app_dir, "app/controllers"))
       Dir.mkdir(File.join(app_dir, "app/views"))
       Dir.mkdir(File.join(app_dir, "db/migrations"))
-      File.join(app_dir, "config/routes.rb"))
-      File.join(app_dir, "Gemfile"))
+      File.new(File.join(app_dir, "config/routes.rb"))
+      File.new(File.join(app_dir, "Gemfile"))
 
     end
 
