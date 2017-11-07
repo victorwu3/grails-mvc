@@ -1,4 +1,7 @@
 require 'thor'
+require 'pathname'
+require 'fileutils'
+require_relative 'version'
 
 module Grails
 
@@ -77,7 +80,13 @@ module Grails
       app_dir = File.join(Dir.pwd, name)
       Raise "Directory of #{app_name} already exists" if Dir.exist?(app_dir)
 
-      
+      Dir.mkdir(File.join(app_dir, "app/models"))
+      Dir.mkdir(File.join(app_dir, "app/controllers"))
+      Dir.mkdir(File.join(app_dir, "app/views"))
+      Dir.mkdir(File.join(app_dir, "db/migrations"))
+      File.join(app_dir, "config/routes.rb"))
+      File.join(app_dir, "Gemfile"))
+
     end
 
 
@@ -93,8 +102,10 @@ module Grails
     desc "server", "starts a grails server, with default port of 3000"
     def server
       raise "Cannot find Grails app" unless project_root
-
-      GrailsServer.new()
+      require_relative "#{project_root}/config/routes"
+      require_relative '../bin/server'
+      server = GrailsServer.new(3000)
+      server.start
     end
 
   end
