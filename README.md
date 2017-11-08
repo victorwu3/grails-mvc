@@ -1,8 +1,8 @@
 # Grails::Mvc
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/grails/mvc`. To experiment with that code, run `bin/console` for an interactive prompt.
+Grails is a lightweight MVC framework based on Rails written in Ruby. GrailedORM, a custom version of Active Record, is implemented in conjunction.
 
-TODO: Delete this and the text above, and describe your gem
+
 
 ## Installation
 
@@ -20,9 +20,35 @@ Or install it yourself as:
 
     $ gem install grails-mvc
 
+## Features
+- GrailedORM - Custom ORM to create associations between objects
+- Thor - create command line methods for Grails
+- Server - Utilizes Rack to make server requests and build responses
+- Router - Builds RESTful routes to the controllers
+- Session - stores and receives session data from the cookies
+- Flash - stores and receives error messages from the cookies
+
 ## Usage
 
-TODO: Write usage instructions here
+To start a new project run this command in the desired directory:
+
+    $ grails new { PROJECT NAME }
+
+To generate models, controllers, and migrations, use the keyword generate like so:
+
+    $ grails generate migration { MIGRATION NAME }
+
+    $ grails generate model { MODEL NAME }    
+
+    $ grails generate controller { CONTROLLER NAME }
+
+To setup the database:
+
+    $ grails db reset  - clears database, remigrates and reseeds
+
+    $ grails db migrate - runs any pending migrations
+
+    $ grails db seed - seeds database
 
 ## Development
 
