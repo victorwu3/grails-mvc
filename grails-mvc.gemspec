@@ -1,5 +1,5 @@
-
-lib = File.expand_path("./lib", __FILE__)
+# -*- encoding: utf-8 -*-
+lib = File.expand_path("../lib", __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require "version"
 
@@ -23,15 +23,17 @@ Gem::Specification.new do |spec|
       "public gem pushes."
   end
 
-  spec.files         = Dir['lib/  *.rb'] + Dir['bin/*'] + Dir['grailedorm/  *.rb']
+  spec.files         = `git ls-files -z`.split("\x0")
   spec.bindir        = "bin"
-  spec.executables  << "grails"
+  spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
 
   spec.add_dependency "thor", "~> 0.20"
+  spec.add_dependency "httparty", "~> 0.13"
+  spec.add_dependency "rake", "~> 10.0"
   spec.add_dependency "sqlite3", "~> 1.3", ">= 1.3.5"
   spec.add_dependency "rack", "~> 1.6", ">= 1.6.4"
-  spec.add_dependency "rake", "~> 10.0"
+  spec.add_dependency "activesupport", "~> 4.2", ">= 4.2.5.2"
 
   spec.add_development_dependency "bundler", "~> 1.16"
   spec.add_development_dependency "rspec", "~> 3.0"

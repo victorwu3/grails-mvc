@@ -16,7 +16,7 @@ module Grails
 end
 
 GRAILS_ROOT = /^(.+)\/lib/.match(File.dirname(__FILE__))[1]
-TEMPLATE_PATH = File.join(GRAILS_ROOT, 'template')
+TEMPLATE_PATH = File.join(GRAILS_ROOT, 'boilerplate')
 PROJECT_ROOT = Grails.project_root
 
 require_relative "#{PROJECT_ROOT}/config/database" if PROJECT_ROOT

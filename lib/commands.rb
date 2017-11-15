@@ -69,11 +69,11 @@ module Grails
     desc "new", "'new' will generate a new Grails application in the working directory"
 
     def new(app_name)
-      app_dir = File.join(Dir.pwd, name)
+      app_dir = File.join(Dir.pwd, app_name)
       Raise "Directory of #{app_name} already exists" if Dir.exist?(app_dir)
-      FileUtils.copy_enyry(TEMPLATE_PATH, app_dir)
+      FileUtils.copy_entry(TEMPLATE_PATH, app_dir)
+      Dir.mkdir(File.join(app_dir, "app/models"))
       Dir.mkdir(File.join(app_dir, "db/migrations"))
-      File.new(File.join(app_dir, "config/routes.rb"))
       File.new(File.join(app_dir, "Gemfile"))
 
     end
