@@ -1,6 +1,6 @@
 # Grails::Mvc
 
-Grails is a lightweight MVC framework based on Rails written in Ruby. GrailedORM, a custom version of Active Record, is implemented in conjunction.
+Grails-mvc is a lightweight MVC framework based on Rails written in Ruby. GrailedORM, a custom version of Active Record, is implemented in conjunction.
 
 
 

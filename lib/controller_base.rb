@@ -5,7 +5,7 @@ require_relative './session'
 require_relative './flash'
 require 'active_support/inflector'
 
-Module GrailsController
+module GrailsController
   class Base
     attr_reader :req, :res, :params
 

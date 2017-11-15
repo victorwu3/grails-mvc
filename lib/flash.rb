@@ -19,4 +19,5 @@ class Flash
 
   def []=(key, value)
     @flash[key.to_s] = value
+  end
 end

@@ -1,5 +1,5 @@
 
-lib = File.expand_path("../lib", __FILE__)
+lib = File.expand_path("./lib", __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require "version"
 
@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
 
   spec.summary       = %q{Grails is a lightweight MVC framework based on Rails!}
   spec.description   = %q{Build web applications easily with Grails!}
-  spec.homepage      = "TODO: Put your gem's website or public repo URL here."
+  spec.homepage      = "https://github.com/victorwu3/grails-mvc"
   spec.license       = "MIT"
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
@@ -23,17 +23,17 @@ Gem::Specification.new do |spec|
       "public gem pushes."
   end
 
-  spec.files         = `git ls-files -z`.split("\x0").reject do |f|
-    f.match(%r{^(test|spec|features)/})
-  end
-  spec.bindir        = "exe"
-  spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
+  spec.files         = Dir['lib/  *.rb'] + Dir['bin/*'] + Dir['grailedorm/  *.rb']
+  spec.bindir        = "bin"
+  spec.executables  << "grails"
   spec.require_paths = ["lib"]
 
   spec.add_dependency "thor", "~> 0.20"
+  spec.add_dependency "sqlite3", "~> 1.3", ">= 1.3.5"
+  spec.add_dependency "rack", "~> 1.6", ">= 1.6.4"
+  spec.add_dependency "rake", "~> 10.0"
 
   spec.add_development_dependency "bundler", "~> 1.16"
-  spec.add_development_dependency "rake", "~> 10.0"
   spec.add_development_dependency "rspec", "~> 3.0"
   spec.add_development_dependency "pry", "~> 0.10", ">= 0.10.3"
   spec.add_development_dependency "activesupport", "< 5.0"

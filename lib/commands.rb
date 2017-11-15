@@ -3,16 +3,8 @@ require 'pathname'
 require 'fileutils'
 require_relative 'version'
 
-module Grails
 
-  def self.project_root
-    current_dir = Pathname.new(Dir.pwd)
-    current_dir.ascend do |dir|
-      gemfile = File.exist?(File.join(dir, 'Gemfile'))
-      app_folder = Dir.exist?(File.join(dir, 'app'))
-      return dir if gemfile && app_folder
-    end
-  end
+module Grails
 
   class Generate < Thor
     desc "migration NAME", "creates a migration file with name"
@@ -31,7 +23,7 @@ module Grails
       raise "Model already exists" if File.exist?(path)
 
       File.open(path, "w") do |file|
-        file.write("class #{name.camelcase}" < GrailedORM::Base\n)
+        file.write("class #{name.camelcase} < GrailedORM::Base\n")
         file.write("   self.finalize!\n")
         file.write("end\n")
       end
@@ -42,7 +34,7 @@ module Grails
 
     desc "controller NAME", "creates a controller file and view folder"
     def controller(name)
-      controller_path = File.join(project_root, "app/controllers/#{file.pluralize.underscore}_controlller.rb"
+      controller_path = File.join(project_root, "app/controllers/#{file.pluralize.underscore}_controlller.rb")
       controller_name = "#{name.pluralize.camelcase}Controller"
       view_dir = File.join(project_root, "app/views/#{file.pluralize.underscore}")
       raise "Controller already exists" if File.exist?(controller_path)
@@ -79,10 +71,7 @@ module Grails
     def new(app_name)
       app_dir = File.join(Dir.pwd, name)
       Raise "Directory of #{app_name} already exists" if Dir.exist?(app_dir)
-
-      Dir.mkdir(File.join(app_dir, "app/models"))
-      Dir.mkdir(File.join(app_dir, "app/controllers"))
-      Dir.mkdir(File.join(app_dir, "app/views"))
+      FileUtils.copy_enyry(TEMPLATE_PATH, app_dir)
       Dir.mkdir(File.join(app_dir, "db/migrations"))
       File.new(File.join(app_dir, "config/routes.rb"))
       File.new(File.join(app_dir, "Gemfile"))
